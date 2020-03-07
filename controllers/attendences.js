@@ -1,3 +1,4 @@
+const Attendeces = require("../models/attendences");
 module.exports = app => {
   app.get("/attendences", (req, res) => {
     return res.status(200).send({
@@ -5,13 +6,18 @@ module.exports = app => {
     });
   });
   app.post("/attendences", (req, res) => {
+    const attendences = req.body;
+    Attendeces.add(attendences, res);
     const response = {
-      returnApi: {
-        name: "William",
-        message: "You are on route of attendences performing POST"
+      data_pet: {
+        client: req.body.client,
+        pet: req.body.pet,
+        service: req.body.service,
+        status: req.body.status,
+        observetion: req.body.observetion,
+        data: req.body.data
       }
     };
     console.log(response);
-    return res.status(200).send(response);
   });
 };
