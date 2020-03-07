@@ -1,7 +1,4 @@
-const express = require('express');
-const morgan = require('morgan');
-
-const app = express();
+const customExpress = require("./config/custom-express");
+const app = customExpress();
 const port = 3003;
-app.use(morgan('dev'));
 app.listen(port, () => console.log(`server running: ${port}`));
