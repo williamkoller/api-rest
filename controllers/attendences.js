@@ -1,23 +1,21 @@
 const Attendeces = require("../models/attendences");
 module.exports = app => {
   app.get("/attendences", (req, res) => {
-    return res.status(200).send({
-      message: "You are on route of attendences performing GET"
-    });
+    Attendeces.list(res);
+  });
+
+  app.get("/attendences/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    Attendeces.searchId(id, res);
   });
   app.post("/attendences", (req, res) => {
     const attendences = req.body;
     Attendeces.add(attendences, res);
-    const response = {
-      data_pet: {
-        client: req.body.client,
-        pet: req.body.pet,
-        service: req.body.service,
-        status: req.body.status,
-        observetion: req.body.observetion,
-        data: req.body.data
-      }
-    };
-    console.log(response);
+  });
+
+  app.patch("/attendences/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const value = req.body;
+    Attendeces.edit(id, value, res);
   });
 };
