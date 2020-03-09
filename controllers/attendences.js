@@ -18,4 +18,10 @@ module.exports = app => {
     const value = req.body;
     Attendeces.edit(id, value, res);
   });
+
+  app.delete("/attendences/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+
+    Attendeces.remove(id, res);
+  });
 };

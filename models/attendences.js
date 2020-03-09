@@ -34,7 +34,7 @@ class Attendences {
         if (err) {
           res.status(400).json(err);
         } else {
-          res.status(201).json(results);
+          res.status(201).json(attendences);
         }
       });
     }
@@ -74,7 +74,18 @@ class Attendences {
       if (err) {
         res.status(400).json(err);
       } else {
-        res.status(200).json(results);
+        res.status(200).json({ ...value, id });
+      }
+    });
+  }
+
+  remove(id, res) {
+    const sql = "DELETE FROM attendences WHERE id = ?";
+    conn.query(sql, id, (err, results) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).json({ id });
       }
     });
   }
